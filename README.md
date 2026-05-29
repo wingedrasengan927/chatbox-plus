@@ -1,5 +1,7 @@
 # Chatbox Plus
 
+![Chatbox Plus on Gemini](public/assets/chatbox-plus-on-gemini.png)
+
 ## Description
 Chatbox Plus is a modern Chrome extension featuring a Lexical-based rich text editor in a convenient side panel. It allows you to compose and format your text effectively, and seamlessly export your markdown directly into supported LLM chat interfaces (Google AI Studio and Google Gemini) with a single click of the "Add to Chat" button.
 
