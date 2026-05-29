@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>chatbox-plus</title>
+    <script src="/mathjax-config.js"></script>
+    <script
+      type="text/javascript"
+      id="MathJax-script"
+      async
+      src="/mathjax/tex-chtml.js"
+    ></script>
+  </head>
+  <body>
+    <div id="app">
+      <div class="editor-wrapper">
+        <div id="lexical-editor" contenteditable="true"></div>
+      </div>
+      <footer class="chatbox-footer">
+        <div class="chatbox-footer-inner">
+          <button type="button" class="footer-btn" id="footer-clear">Clear</button>
+          <button type="button" class="footer-btn footer-btn-primary" id="footer-add-to-chat">Add to Chat</button>
+        </div>
+      </footer>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
