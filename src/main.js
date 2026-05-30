@@ -1,7 +1,7 @@
 import "lexical-medium-editor-js/style.css";
 import "./style.css";
-import { clearEditor, addToChat } from "./utils.js";
-import { initializeEditor, MARKDOWN_PASTE_COMMAND } from "lexical-medium-editor-js";
+import { clearEditor, addToChat, pasteMarkdown } from "./utils.js";
+import { initializeEditor } from "lexical-medium-editor-js";
 
 const editorRef = document.getElementById("lexical-editor");
 const editor = initializeEditor(editorRef, undefined, {
@@ -16,9 +16,7 @@ document
 
 document
   .getElementById("footer-paste-markdown")
-  .addEventListener("click", () => {
-    editor.dispatchCommand(MARKDOWN_PASTE_COMMAND, undefined);
-  });
+  .addEventListener("click", () => pasteMarkdown(editor));
 
 document
   .getElementById("footer-add-to-chat")

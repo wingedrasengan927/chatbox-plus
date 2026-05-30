@@ -12,7 +12,7 @@
   "background": {
     "service_worker": "background.js"
   },
-  "permissions": ["sidePanel", "tabs", "scripting"],
+  "permissions": ["sidePanel", "tabs", "scripting", "clipboardRead"],
   "host_permissions": [
     "*://aistudio.google.com/*",
     "*://gemini.google.com/*"

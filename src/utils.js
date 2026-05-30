@@ -4,6 +4,7 @@ import { $convertToMarkdownString } from "@lexical/markdown";
 import {
   initializeEditor,
   MEDIUM_TRANSFORMERS,
+  MARKDOWN_PASTE_COMMAND
 } from "lexical-medium-editor-js";
 
 export function clearEditor(editor) {
@@ -115,5 +116,23 @@ export async function addToChat(editor) {
   } catch (error) {
     console.error("Error sending message to tab:", error);
     alert("Error communicating with tab: " + error.message);
+  }
+}
+
+export async function pasteMarkdown(editor) {
+  try {
+    const clipboardText = await navigator.clipboard.readText();
+    if (!clipboardText) return;
+
+    const syntheticEvent = {
+      preventDefault: () => {},
+      clipboardData: {
+        getData: () => clipboardText,
+      },
+    };
+
+    editor.dispatchCommand(MARKDOWN_PASTE_COMMAND, syntheticEvent);
+  } catch (err) {
+    console.error("Failed to read clipboard contents: ", err);
   }
 }
