@@ -17,8 +17,27 @@ export function getEditorMarkdown(editor) {
   let markdown = "";
   editor.read(() => {
     markdown = $convertToMarkdownString(MEDIUM_TRANSFORMERS);
+    const unescapedMarkdown = unescapeMarkdown(markdown);
   });
-  return markdown;
+  return unescapedMarkdown;
+}
+
+// Reverses the character escaping that @lexical/markdown applies on export.
+// It only strips a backslash when it precedes a markdown special char it
+// would have escaped, so legitimate text is preserved.
+function unescapeMarkdown(markdown) {
+  const lines = markdown.split("\n");
+  let inFence = false;
+  return lines
+    .map((line) => {
+      if (/^\s*```/.test(line)) {
+        inFence = !inFence;
+        return line;
+      }
+      if (inFence) return line;
+      return line.replace(/\\([*_`~\\])/g, "$1");
+    })
+    .join("\n");
 }
 
 // Self-contained function to be executed in the target tab
