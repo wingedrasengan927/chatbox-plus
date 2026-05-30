@@ -15,9 +15,10 @@ export function clearEditor(editor) {
 
 export function getEditorMarkdown(editor) {
   let markdown = "";
+  let unescapedMarkdown = ""
   editor.read(() => {
     markdown = $convertToMarkdownString(MEDIUM_TRANSFORMERS);
-    const unescapedMarkdown = unescapeMarkdown(markdown);
+    unescapedMarkdown = unescapeMarkdown(markdown);
   });
   return unescapedMarkdown;
 }
