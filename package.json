@@ -15,6 +15,6 @@
     "@lexical/html": "^0.44.0",
     "@lexical/markdown": "^0.44.0",
     "lexical": "^0.44.0",
-    "lexical-medium-editor-js": "^1.0.3"
+    "lexical-medium-editor-js": "^1.0.4"
   }
 }
