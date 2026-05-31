@@ -5,6 +5,8 @@
 ## Description
 Chatbox Plus is a modern Chrome extension featuring a Lexical-based rich text editor in a convenient side panel. It allows you to compose and format your text effectively, and seamlessly export your markdown directly into supported LLM chat interfaces (Google AI Studio and Google Gemini) with a single click of the "Add to Chat" button. You also have an option to change font sizes—you can pick small, medium, or large (default is medium).
 
+**Note on Pasting Markdown:** If you've got a markdown text that you want to paste into the editor, don't paste it directly as the editor is not a native markdown editor. Instead, copy the markdown and click on the **Paste Markdown** button. The text will be automatically converted and pasted in the editor.
+
 ## Installation
 
 1. Clone or download this repository.
