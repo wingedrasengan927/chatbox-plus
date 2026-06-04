@@ -15,6 +15,9 @@
   "permissions": ["sidePanel", "tabs", "scripting", "clipboardRead"],
   "host_permissions": [
     "*://aistudio.google.com/*",
-    "*://gemini.google.com/*"
+    "*://gemini.google.com/*",
+    "*://chatgpt.com/*",
+    "*://chat.openai.com/*",
+    "*://claude.ai/*"
   ]
 }

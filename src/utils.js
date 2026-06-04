@@ -44,6 +44,36 @@ function unescapeMarkdown(markdown) {
 
 // Self-contained function to be executed in the target tab
 function injectTextIntoChat(text) {
+  const chatgptHandler = (text) => {
+    const chatgptInput = document.querySelector('#prompt-textarea');
+    if (chatgptInput) {
+      if (chatgptInput.getAttribute('contenteditable') === 'true' || chatgptInput.tagName !== 'TEXTAREA') {
+        chatgptInput.focus();
+        const selection = window.getSelection();
+        if (selection) {
+          selection.selectAllChildren(chatgptInput);
+          selection.collapseToEnd();
+        }
+        document.execCommand('insertText', false, (chatgptInput.textContent.trim() ? '\n\n' : '') + text);
+        return { success: true };
+      } else {
+        chatgptInput.value = chatgptInput.value ? chatgptInput.value + '\n\n' + text : text;
+        chatgptInput.dispatchEvent(new Event('input', { bubbles: true }));
+        return { success: true };
+      }
+    }
+    
+    // Fallback for any standard textarea on the page
+    const textarea = document.querySelector('textarea');
+    if (textarea) {
+      textarea.value = textarea.value ? textarea.value + '\n\n' + text : text;
+      textarea.dispatchEvent(new Event('input', { bubbles: true }));
+      return { success: true };
+    }
+
+    return { success: false, error: "Input area not found on ChatGPT." };
+  };
+
   const handlers = {
     "aistudio.google.com": (text) => {
       const textarea = document.querySelector('textarea[formcontrolname="promptText"]');
@@ -79,6 +109,34 @@ function injectTextIntoChat(text) {
       }
       
       return { success: false, error: "Input area not found on Gemini." };
+    },
+    "chatgpt.com": chatgptHandler,
+    "chat.openai.com": chatgptHandler,
+    "claude.ai": (text) => {
+      // Claude uses a contenteditable div (ProseMirror-based editor)
+      const claudeInput = document.querySelector('div[contenteditable="true"]');
+      if (claudeInput) {
+        claudeInput.focus();
+        // Move cursor to the end
+        const selection = window.getSelection();
+        if (selection) {
+          selection.selectAllChildren(claudeInput);
+          selection.collapseToEnd();
+        }
+        // Insert the text using document.execCommand to trigger framework event listeners
+        document.execCommand('insertText', false, (claudeInput.textContent.trim() ? '\n\n' : '') + text);
+        return { success: true };
+      }
+
+      // Fallback for any standard textarea on the page
+      const textarea = document.querySelector('textarea');
+      if (textarea) {
+        textarea.value = textarea.value ? textarea.value + '\n\n' + text : text;
+        textarea.dispatchEvent(new Event('input', { bubbles: true }));
+        return { success: true };
+      }
+
+      return { success: false, error: "Input area not found on Claude." };
     }
   };
 
