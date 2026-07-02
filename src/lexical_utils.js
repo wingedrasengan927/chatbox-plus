@@ -1,4 +1,4 @@
-import { CLEAR_EDITOR_COMMAND } from "lexical";
+import { $getRoot } from "lexical";
 import { $convertToMarkdownString, $convertFromMarkdownString, TRANSFORMERS } from "@lexical/markdown";
 import {
   HR_TRANSFORMER,
@@ -9,7 +9,10 @@ import {
 } from "lexical-medium-editor-js";
 
 export function clearEditor(editor) {
-  editor.dispatchCommand(CLEAR_EDITOR_COMMAND, undefined);
+  editor.update(() => {
+    const root = $getRoot();
+    root.clear();
+  });
 }
 
 export function getEditorMarkdown(editor) {
