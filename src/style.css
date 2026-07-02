@@ -16,17 +16,23 @@ body {
 }
 
 .editor-wrapper {
-  flex: 1;
-  overflow-y: auto;
-  width: 100%;
-  margin: 0 auto 32px;
-  padding: 40px 16px 16px 40px;
+	container-type: inline-size;
+	container-name: editor;
+	/* Required for MathJax Linebreak */
+	max-width: 100%;
+	box-sizing: border-box;
 }
 
-@media (min-width: 640px) {
-  .editor-wrapper {
-    width: 90%;
-  }
+/* Required for MathJax Linebreak */
+#lexical-editor {
+	max-width: 100%;
+	box-sizing: border-box;
+}
+
+/* Required for MathJax Linebreak */
+mjx-container[display="true"] {
+	max-width: 100% !important;
+	width: 100% !important;
 }
 
 .chatbox-footer {

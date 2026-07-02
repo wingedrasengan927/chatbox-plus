@@ -1,14 +1,11 @@
-import "lexical-medium-editor-js/style.css";
+import 'lexical-medium-editor-js/style.css';
 import "./style.css";
-import { clearEditor, addToChat, pasteMarkdown } from "./utils.js";
+import { clearEditor, pasteMarkdown } from "./lexical_utils.js";
+import { addToChat } from "./chat_utils.js";
 import { initializeEditor } from "lexical-medium-editor-js";
 
 const editorRef = document.getElementById("lexical-editor");
-const editor = initializeEditor(editorRef, undefined, {
-  isHeadingOneFirst: true,
-  fontSize: "medium",
-  disableImage: true,
-});
+const editor = initializeEditor(editorRef);
 
 document
   .getElementById("footer-clear")
