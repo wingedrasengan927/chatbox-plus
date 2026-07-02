@@ -33,6 +33,19 @@ window.MathJax = {
   },
   startup: {
     typeset: false,
+    ready() {
+      MathJax.startup.defaultReady();
+      const font = MathJax.startup.document.outputJax.font;
+      if (font) {
+        const dynamicFiles = font.dynamicFiles || (font.constructor && font.constructor.dynamicFiles);
+        if (dynamicFiles) {
+          // Disable all dynamic font loading from CDN to comply with Content Security Policy
+          for (const key of Object.keys(dynamicFiles)) {
+            delete dynamicFiles[key];
+          }
+        }
+      }
+    }
   },
 };
 
